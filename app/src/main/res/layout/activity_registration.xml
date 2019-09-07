@@ -7,7 +7,7 @@
     android:background="@drawable/back_design"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".RegistrationActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,16 +19,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/label_login"
+                android:id="@+id/label_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Log In"
+                android:text="Register"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="@android:color/white" />
 
             <EditText
-                android:id="@+id/email_login"
+                android:id="@+id/email_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -39,7 +39,7 @@
                 android:textColorHint="@android:color/white" />
 
             <EditText
-                android:id="@+id/password_login"
+                android:id="@+id/password_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -51,23 +51,23 @@
                 android:textColorHint="@android:color/white" />
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/ed_design"
                 android:padding="6dp"
-                android:text="Log In"
+                android:text="Sign Up"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@android:color/white" />
 
             <TextView
-                android:id="@+id/sign_up_text"
+                android:id="@+id/sign_in_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Don't have account ? Sign up here"
+                android:text="Already have an account ? Sign in here"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@android:color/white" />
 
