@@ -1,25 +1,37 @@
 package com.example.dailyshoppinglist;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.dailyshoppinglist.Model.Data;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-    public FloatingActionButton fab_btn;
+    private FloatingActionButton fab_btn;
+
+    private DatabaseReference mDatabase;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,15 @@ public class HomeActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Daily Shopping List");
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+
+        String uId = mUser.getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
+
 
         fab_btn =  findViewById(R.id.fab);
 
@@ -66,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
                 String type = mType.getText().toString().trim();
                 String amount = mAmount.getText().toString().trim();
                 String note = mNote.getText().toString().trim();
+                int numAmount = Integer.parseInt(amount);
 
                 if(TextUtils.isEmpty(type)){
                     mType.setError("Required field ...");
@@ -79,6 +101,17 @@ public class HomeActivity extends AppCompatActivity {
                     mNote.setError("Required field ...");
                     return;
                 }
+
+                String id = mDatabase.push().getKey();
+
+                String date = DateFormat.getDateInstance().format(new Date());
+
+                Data data = new Data(type, numAmount, note, date, id);
+
+                mDatabase.child(id).setValue(data);
+
+                Toast.makeText(getApplicationContext(), "Data Added", Toast.LENGTH_SHORT).show();
+
                 dialog.dismiss();
             }
         });
