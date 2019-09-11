@@ -17,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Daily Shopping List");
+
     }
 
 }

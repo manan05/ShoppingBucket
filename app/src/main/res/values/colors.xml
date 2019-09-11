@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#EC4150</color>
-    <color name="colorPrimaryDark">#F02626</color>
+    <color name="colorPrimaryDark">#F5933D</color>
     <color name="colorAccent">#D81B60</color>
 
     <!--Background Login Page Color-->
