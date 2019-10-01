@@ -48,6 +48,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView totalSumResult;
 
+    // Global Variable
+
+    protected String type;
+    protected int amount;
+    protected String note;
+    protected String post_key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
         fab_btn = findViewById(R.id.fab);
 
-        totalSumResult =findViewById(R.id.total_amount);
+        totalSumResult = findViewById(R.id.total_amount);
 
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,9 +106,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                int totalAmount  = 0;
+                int totalAmount = 0;
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     Data data = snapshot.getValue(Data.class);
 
@@ -201,7 +208,7 @@ public class HomeActivity extends AppCompatActivity {
         final FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i, @NonNull Data data) {
+            protected void onBindViewHolder(@NonNull MyViewHolder viewHolder, final int i, @NonNull final Data data) {
 
                 viewHolder.setDate(data.getDate());
                 viewHolder.setType(data.getType());
@@ -211,6 +218,12 @@ public class HomeActivity extends AppCompatActivity {
                 viewHolder.myView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        post_key = getRef(i).getKey();
+                        type = data.getType();
+                        note = data.getNote();
+                        amount = data.getAmount();
+
                         updateData();
                     }
                 });
@@ -261,23 +274,32 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void updateData(){
+    public void updateData() {
 
         AlertDialog.Builder myDialog = new AlertDialog.Builder(HomeActivity.this);
 
         LayoutInflater layoutInflater = LayoutInflater.from(HomeActivity.this);
 
-        View view = layoutInflater.inflate(R.layout.update_input_field,null);
+        View view = layoutInflater.inflate(R.layout.update_input_field, null);
 
-        AlertDialog dialog = myDialog.create();
+        final AlertDialog dialog = myDialog.create();
 
         dialog.setView(view);
 
-        EditText editType = view.findViewById(R.id.et_type_upd);
+        final EditText editType = view.findViewById(R.id.et_type_upd);
 
-        EditText editAmount = view.findViewById(R.id.et_amount_upd);
+        final EditText editAmount = view.findViewById(R.id.et_amount_upd);
 
-        EditText editNote = view.findViewById(R.id.et_note_upd);
+        final EditText editNote = view.findViewById(R.id.et_note_upd);
+
+        editType.setText(type);
+        editType.setSelection(type.length());
+
+        editAmount.setText(String.valueOf(amount));
+        editAmount.setSelection(String.valueOf(amount).length());
+
+        editNote.setText(note);
+        editNote.setSelection(note.length());
 
         Button btnUpdate = view.findViewById(R.id.btn_update_upd);
 
@@ -287,6 +309,20 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                type = editType.getText().toString().trim();
+                String mAmount = String.valueOf(amount);
+                mAmount = editAmount.getText().toString().trim();
+                note = editNote.getText().toString().trim();
+
+                int intAmount = Integer.parseInt(mAmount);
+
+                String date = DateFormat.getDateInstance().format(new Date());
+
+                Data data = new Data(type, intAmount, note, date, post_key);
+
+                mDatabase.child(post_key).setValue(data);
+
+                dialog.dismiss();
             }
         });
 
@@ -294,6 +330,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mDatabase.child(post_key).removeValue();
+
+                dialog.dismiss();
             }
         });
 
