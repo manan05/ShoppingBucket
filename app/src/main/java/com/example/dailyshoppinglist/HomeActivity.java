@@ -207,6 +207,13 @@ public class HomeActivity extends AppCompatActivity {
                 viewHolder.setType(data.getType());
                 viewHolder.setNote(data.getNote());
                 viewHolder.setAmount(data.getAmount());
+
+                viewHolder.myView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateData();
+                    }
+                });
             }
 
             @NonNull
@@ -251,6 +258,46 @@ public class HomeActivity extends AppCompatActivity {
             String strAmount = String.valueOf(amount);
             mAmount.setText(strAmount);
         }
+
+    }
+
+    public void updateData(){
+
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(HomeActivity.this);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(HomeActivity.this);
+
+        View view = layoutInflater.inflate(R.layout.update_input_field,null);
+
+        AlertDialog dialog = myDialog.create();
+
+        dialog.setView(view);
+
+        EditText editType = view.findViewById(R.id.et_type_upd);
+
+        EditText editAmount = view.findViewById(R.id.et_amount_upd);
+
+        EditText editNote = view.findViewById(R.id.et_note_upd);
+
+        Button btnUpdate = view.findViewById(R.id.btn_update_upd);
+
+        Button btnDelete = view.findViewById(R.id.btn_delete_upd);
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        dialog.show();
 
     }
 
