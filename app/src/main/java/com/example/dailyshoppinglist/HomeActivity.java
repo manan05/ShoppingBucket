@@ -165,7 +165,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setLifecycleOwner(this)
                         .build();
 
-        FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
+        final FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
 
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i, @NonNull Data data) {
@@ -179,10 +179,14 @@ public class HomeActivity extends AppCompatActivity {
             @NonNull
             @Override
             public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_data, parent, false);
+                return new MyViewHolder(view);
             }
+
         };
 
+        recyclerView.setAdapter(adapter);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

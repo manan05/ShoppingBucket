@@ -22,8 +22,8 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="11 Sep,2019"
                 android:padding="10dp"
+                android:text="11 Sep,2019"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="#FFB640FF" />
 
@@ -32,9 +32,8 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_margin="10dp"
-            >
+            android:layout_weight="2">
 
             <TextView
                 android:id="@+id/type"
