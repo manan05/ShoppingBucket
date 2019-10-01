@@ -322,6 +322,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 mDatabase.child(post_key).setValue(data);
 
+                Toast.makeText(getApplicationContext(),"Data Updated Successfully.",Toast.LENGTH_SHORT).show();
+
                 dialog.dismiss();
             }
         });
@@ -331,6 +333,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 mDatabase.child(post_key).removeValue();
+
+                Toast.makeText(getApplicationContext(),"Data Deleted Successfully.",Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
