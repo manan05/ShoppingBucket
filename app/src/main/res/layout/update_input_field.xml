@@ -49,7 +49,7 @@
                     android:layout_weight="2">
 
                     <EditText
-                        android:id="@+id/et_type"
+                        android:id="@+id/et_type_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp" />
@@ -83,7 +83,7 @@
                     android:layout_weight="2">
 
                     <EditText
-                        android:id="@+id/et_amount"
+                        android:id="@+id/et_amount-upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp" />
@@ -117,7 +117,7 @@
                     android:layout_weight="2">
 
                     <EditText
-                        android:id="@+id/et_note"
+                        android:id="@+id/et_note_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp" />
@@ -127,21 +127,52 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_save"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/ed_design"
-                android:text="Save"
-                android:textAllCaps="true"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@android:color/white" />
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/btn_delete_upd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ed_design"
+                        android:text="Delete"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/btn_save_upd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ed_design"
+                        android:text="Save"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/white" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
     </ScrollView>
-
-
 
 </LinearLayout>

@@ -25,8 +25,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -43,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private RecyclerView recyclerView;
+
+    private TextView totalSumResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +84,41 @@ public class HomeActivity extends AppCompatActivity {
 
         fab_btn = findViewById(R.id.fab);
 
+        totalSumResult =findViewById(R.id.total_amount);
+
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 customDialog();
             }
         });
+
+        //Total Sum Calculate
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int totalAmount  = 0;
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    Data data = snapshot.getValue(Data.class);
+
+                    totalAmount += data.getAmount();
+
+                    String strTotalAmount = String.valueOf(totalAmount);
+
+                    totalSumResult.setText(strTotalAmount);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void customDialog() {
