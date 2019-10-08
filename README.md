@@ -7,4 +7,6 @@ LOG IN PAGE :
 
 REGISTRATION PAGE :
 
-![](images/registration.jpeg)
+![](images/"Main Screen.jpeg")
+
+![](images/"Add Update Delete.jpeg")
