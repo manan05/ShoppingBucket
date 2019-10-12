@@ -1,5 +1,7 @@
 # DailyShoppingList
 
+A basic application to store data (shopping items) using Firebase.
+
 LOG IN PAGE :
 
 ![](images/login.jpeg)
