@@ -11,6 +11,8 @@ REGISTRATION PAGE :
 
 ![](images/registration.jpeg)
 
+
 ![](images/mainScreen.jpeg)
+
 
 ![](images/addUpdateDelete.jpeg)
