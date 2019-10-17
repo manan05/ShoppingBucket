@@ -1,4 +1,4 @@
-# DailyShoppingList
+# ShoppingBucket
 
 A basic application to store data (shopping items) using Firebase.
 
