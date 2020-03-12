@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
 
+        // server will be synced
         mDatabase.keepSynced(true);
 
         mToolbar = findViewById(R.id.home_toolbar);
@@ -131,6 +132,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    // Custom dialog on clicking add btn
     private void customDialog() {
 
         AlertDialog.Builder myDialog = new AlertDialog.Builder(HomeActivity.this);
@@ -324,7 +326,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 mDatabase.child(post_key).setValue(data);
 
-                Toast.makeText(getApplicationContext(),"Data Updated Successfully.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Data Updated Successfully.", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
@@ -336,7 +338,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 mDatabase.child(post_key).removeValue();
 
-                Toast.makeText(getApplicationContext(),"Data Deleted Successfully.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Data Deleted Successfully.", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
@@ -348,20 +350,20 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.logout:
                 mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
         }
-        Toast.makeText(getApplicationContext(),"Logout!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Logout!", Toast.LENGTH_SHORT).show();
 
         return super.onOptionsItemSelected(item);
     }
